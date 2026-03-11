@@ -647,6 +647,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-4px); }
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -656,6 +663,206 @@
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* ─── Inquiry Form Modal ─── */
+    .form-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .form-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .form-modal {
+      background: var(--paper);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 540px;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+      animation: formSlideUp 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    @keyframes formSlideUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .form-modal::-webkit-scrollbar { width: 3px; }
+    .form-modal::-webkit-scrollbar-thumb { background: var(--warm); border-radius: 3px; }
+
+    .form-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(10,10,10,0.06);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+
+    .form-close:hover { background: rgba(10,10,10,0.12); }
+
+    .form-header {
+      padding: 2.5rem 2.5rem 0;
+    }
+
+    .form-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .form-subtitle {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .form-body {
+      padding: 2rem 2.5rem 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(10,10,10,0.1);
+      border-radius: 10px;
+      background: #fff;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--warm);
+      box-shadow: 0 0 0 3px rgba(200,169,126,0.15);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(10,10,10,0.25);
+      font-weight: 300;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .form-chip {
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(10,10,10,0.1);
+      border-radius: 30px;
+      background: #fff;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .form-chip:hover {
+      border-color: var(--warm);
+      color: var(--warm-deep);
+    }
+
+    .form-chip.selected {
+      background: var(--warm);
+      border-color: var(--warm);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-submit:hover {
+      background: #222;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .form-submit:active {
+      transform: translateY(0);
+    }
+
+    .form-success {
+      padding: 4rem 2.5rem;
+      text-align: center;
+    }
+
+    .success-icon {
+      margin-bottom: 1.5rem;
     }
 
     /* ─── Responsive ─── */
@@ -901,7 +1108,7 @@
       </p>
       <div class="cta-buttons">
         <a href="https://kmong.com" target="_blank" class="btn btn-primary">크몽에서 만나기</a>
-        <a href="mailto:contact@example.com" class="btn btn-secondary">이메일 문의</a>
+        <button class="btn btn-secondary" onclick="openInquiryForm()">상담 및 디자인 의뢰하기</button>
       </div>
     </div>
   </section>
@@ -910,6 +1117,83 @@
   <footer>
     <p>&copy; 2026 이서 — AI Creative Director. All rights reserved.</p>
   </footer>
+
+  <!-- Inquiry Form Modal -->
+  <div class="form-backdrop" id="inquiryForm">
+    <div class="form-modal">
+      <button class="form-close" onclick="closeInquiryForm()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      
+      <div class="form-header">
+        <p class="form-eyebrow">Design Inquiry</p>
+        <h3 class="form-title">상담 및 디자인 의뢰</h3>
+        <p class="form-subtitle">프로젝트에 대해 간단히 알려주세요. 24시간 내 회신드리겠습니다.</p>
+      </div>
+
+      <div class="form-body" id="formBody">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-group">
+          <label class="form-label">이름 / 회사명</label>
+          <input type="text" class="form-input" id="fName" placeholder="홍길동 / 하늘아래농원">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">연락처</label>
+          <input type="text" class="form-input" id="fContact" placeholder="이메일 또는 전화번호">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">의뢰 유형</label>
+          <div class="form-chips" id="fType">
+            <button class="form-chip" data-value="상세페이지">상세페이지</button>
+            <button class="form-chip" data-value="랜딩페이지">랜딩페이지</button>
+            <button class="form-chip" data-value="웹사이트">웹사이트</button>
+            <button class="form-chip" data-value="카피라이팅">카피라이팅</button>
+            <button class="form-chip" data-value="기타">기타</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">판매 채널</label>
+          <div class="form-chips" id="fChannel">
+            <button class="form-chip" data-value="스마트스토어">스마트스토어</button>
+            <button class="form-chip" data-value="쿠팡">쿠팡</button>
+            <button class="form-chip" data-value="자사몰">자사몰</button>
+            <button class="form-chip" data-value="톡딜/톡스토어">톡딜/톡스토어</button>
+            <button class="form-chip" data-value="기타">기타</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">상품 또는 프로젝트 설명</label>
+          <textarea class="form-textarea" id="fDesc" rows="4" placeholder="어떤 상품인지, 어떤 결과를 원하시는지 자유롭게 적어주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">예산 범위</label>
+          <div class="form-chips" id="fBudget">
+            <button class="form-chip" data-value="30만원 이하">30만원 이하</button>
+            <button class="form-chip" data-value="30~50만원">30~50만원</button>
+            <button class="form-chip" data-value="50~100만원">50~100만원</button>
+            <button class="form-chip" data-value="100만원 이상">100만원 이상</button>
+            <button class="form-chip" data-value="협의">협의</button>
+          </div>
+        </div>
+
+        <button class="form-submit" onclick="submitInquiry()">의뢰서 보내기</button>
+      </div>
+
+      <div class="form-success" id="formSuccess" style="display:none;">
+        <div class="success-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3 class="form-title">감사합니다</h3>
+        <p class="form-subtitle">의뢰서가 성공적으로 전송되었습니다.<br>24시간 내 회신드리겠습니다.</p>
+        <button class="btn btn-primary" onclick="closeInquiryForm()" style="margin-top:2rem;">확인</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal -->
   <div class="modal-backdrop" id="modal">
@@ -1030,8 +1314,108 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') { closeModal(); closeInquiryForm(); }
     });
+
+    // ─── Inquiry Form ───
+    function openInquiryForm() {
+      const el = document.getElementById('inquiryForm');
+      el.style.display = 'flex';
+      requestAnimationFrame(() => el.classList.add('active'));
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInquiryForm() {
+      const el = document.getElementById('inquiryForm');
+      el.classList.remove('active');
+      setTimeout(() => {
+        el.style.display = 'none';
+        // Reset form
+        document.getElementById('formBody').style.display = '';
+        document.getElementById('formSuccess').style.display = 'none';
+        document.querySelectorAll('.form-input, .form-textarea').forEach(i => i.value = '');
+        document.querySelectorAll('.form-chip').forEach(c => c.classList.remove('selected'));
+      }, 350);
+      document.body.style.overflow = '';
+    }
+
+    // Chip toggle
+    document.querySelectorAll('.form-chips').forEach(group => {
+      group.addEventListener('click', (e) => {
+        const chip = e.target.closest('.form-chip');
+        if (!chip) return;
+        // Single select per group
+        group.querySelectorAll('.form-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+      });
+    });
+
+    // Backdrop close
+    document.getElementById('inquiryForm').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeInquiryForm();
+    });
+
+    // ─── Formspree 연동 ───
+    // ⚠️ 아래 YOUR_FORM_ID를 Formspree에서 발급받은 ID로 교체하세요
+    // 예: 'xpzvqkdl' (https://formspree.io/f/xpzvqkdl)
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    async function submitInquiry() {
+      const name = document.getElementById('fName').value.trim();
+      const contact = document.getElementById('fContact').value.trim();
+
+      if (!name || !contact) {
+        [document.getElementById('fName'), document.getElementById('fContact')].forEach(el => {
+          if (!el.value.trim()) {
+            el.style.borderColor = '#e74c3c';
+            el.style.animation = 'shake 0.4s ease';
+            setTimeout(() => { el.style.borderColor = ''; el.style.animation = ''; }, 600);
+          }
+        });
+        return;
+      }
+
+      const typeChip = document.querySelector('#fType .form-chip.selected');
+      const channelChip = document.querySelector('#fChannel .form-chip.selected');
+      const budgetChip = document.querySelector('#fBudget .form-chip.selected');
+
+      const submitBtn = document.querySelector('.form-submit');
+      submitBtn.textContent = '전송 중...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.6';
+
+      const payload = {
+        이름: name,
+        연락처: contact,
+        의뢰유형: typeChip ? typeChip.dataset.value : '미선택',
+        판매채널: channelChip ? channelChip.dataset.value : '미선택',
+        프로젝트설명: document.getElementById('fDesc').value.trim() || '없음',
+        예산범위: budgetChip ? budgetChip.dataset.value : '미선택',
+        _replyto: contact.includes('@') ? contact : '',
+        _subject: `[포트폴리오] ${name}님의 디자인 의뢰`,
+      };
+
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          document.getElementById('formBody').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          throw new Error('전송 실패');
+        }
+      } catch (err) {
+        submitBtn.textContent = '의뢰서 보내기';
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        alert('전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        console.error(err);
+      }
+    }
   </script>
 </body>
 </html>
